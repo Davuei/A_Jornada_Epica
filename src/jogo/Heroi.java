@@ -27,9 +27,9 @@ public class Heroi extends Entidades{
 		this.setDano_base(2.5);
 		this.setStamina_max(50);
 		this.setStamina_atual(this.getStamina_max());
-		if(raca == "Orc") {
+		if(raca.equals("Orc")) {
 			this.setHabilidades("Paulada", "Desfere um ataque poderoso, causando o dobro do dano base.", this.getDano_base() * 2);
-		}else if(raca == "Mago") {
+		}else if(raca.equals("Mago")) {
 			this.setHabilidades("Bola de fogo", "Lança uma bola de fogo que causa dano alto.", 15);
 		}else {
 			this.setHabilidades("Sem_nome", "Sem_descricao", 0);

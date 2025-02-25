@@ -42,11 +42,14 @@ public class Heroi extends Entidades{
 		}
 	}
 
-	//aceitar missao
-
-	public void aceitarMissao(Missao missao) {
-    missoesAtivas.add(missao);
-    System.out.println("Missão aceita: " + missao.getDescricao());
+	// Aceitar missão se não for duplicada
+public void aceitarMissao(Missao missao) {
+    if (temMissaoAtiva(missao.getDescricao())) {
+        System.out.println("Você já tem essa missão em andamento!");
+    } else {
+        missoesAtivas.add(missao);
+        System.out.println("Missão aceita: " + missao.getDescricao());
+    }
 }
 
 	// Atualiza o progresso das missões ao derrotar um monstro
@@ -61,6 +64,18 @@ public void derrotarMonstro() {
             }
         }
     }}
+
+
+	// Verifica se o herói já tem uma missão ativa com a mesma descrição
+public boolean temMissaoAtiva(String descricao) {
+    for (Missao missao : missoesAtivas) {
+        if (!missao.isConcluida() && missao.getDescricao().equalsIgnoreCase(descricao)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 	
 

@@ -2,6 +2,9 @@ package jogo;
 
 public class Heroi extends Entidades{
 	private String armadura = "Sem_armadura";
+	private int xp;
+	private int xpProximoNivel;
+	private List<Missao> missoesAtivas = new ArrayList<Missao>();
 	
 	//Contrutores
 	public Heroi() {
@@ -14,6 +17,9 @@ public class Heroi extends Entidades{
 		this.setStamina_max(50);
 		this.setStamina_atual(this.getStamina_max());
 		this.setHabilidades("Sem_nome", "Sem_descricao", 0, 0);
+		this.xp = 0;
+		this.xpProximoNivel = 100; // XP necessário para o próximo nível
+
 	}
 	
 	public Heroi(String nome, String raca) {
@@ -25,6 +31,8 @@ public class Heroi extends Entidades{
 		this.setDano_base(2.5);
 		this.setStamina_max(50);
 		this.setStamina_atual(this.getStamina_max());
+		this.xp = 0;
+		this.xpProximoNivel = 100;
 		if(raca.equals("Orc")) {
 			this.setHabilidades("Paulada", "Desfere um ataque poderoso, causando o dobro do dano base.", this.getDano_base() * 2, 10);
 		}else if(raca.equals("Mago")) {
@@ -33,7 +41,29 @@ public class Heroi extends Entidades{
 			this.setHabilidades("Sem_nome", "Sem_descricao", 0, 0);
 		}
 	}
+
+	//aceitar missao
+
+	public void aceitarMissao(Missao missao) {
+    missoesAtivas.add(missao);
+    System.out.println("Missão aceita: " + missao.getDescricao());
+}
+
+	// Atualiza o progresso das missões ao derrotar um monstro
+public void derrotarMonstro() {
+    System.out.println(this.getNome() + " derrotou um monstro!");
+    for (Missao missao : missoesAtivas) {
+        if (!missao.isConcluida()) {
+            missao.atualizarProgresso();
+            if (missao.isConcluida()) {
+                ganharXp(missao.getXpRecompensa()); // 🎁 Herói ganha XP ao concluir
+                System.out.println("Recompensa de XP recebida: " + missao.getXpRecompensa());
+            }
+        }
+    }}
+
 	
+
 	//Level Up
 	public void levelUp() {
 		this.setNivel(this.getNivel() + 1);
@@ -47,6 +77,24 @@ public class Heroi extends Entidades{
 	public void guardarHabilidade() {
 		
 	}
+
+	//ganho de XP
+	public void ganharXp(int quantidade) {
+    this.xp += quantidade;
+	System.out.printf("%s ganhou %d XP! Total: %d / %d%n", this.getNome(), quantidade, this.xp, this.xpProximoNivel);
+    verificarLevelUp();
+}
+
+	//aviso de level up
+	private void verificarLevelUp() {
+    while (this.xp >= this.xpProximoNivel) {
+        this.xp -= this.xpProximoNivel;
+        levelUp();
+        this.xpProximoNivel = (int) (this.xpProximoNivel * 1.5);
+        System.out.println("Parabéns! " + this.getNome() + " subiu para o nível: " + this.getNivel() + "!");
+    }
+}
+
 	
 	//Listar características do herói
 	public void listarHeroi() {
@@ -58,7 +106,14 @@ public class Heroi extends Entidades{
 		this.getHabilidades();
 		System.out.println("Ouro: " + this.getOuro());
 		System.out.println("Nivel: " + this.getNivel());
-		System.out.println("EXP: " + this.getExp());
+		System.out.println("EXP: " + this.xp + "/" + this.xpProximoNivel);
+		System.out.println("Missões ativas:");
+		for (Missao missao : missoesAtivas) {
+   		String status = missao.isConcluida() ? "Concluída" : "Em progresso";
+   	 	String progresso = missao.isConcluida() ? "" : String.format(" - Faltam %d monstros", missao.objetivoMonstros - missao.monstrosDerrotados);
+    	System.out.println("- " + missao.getDescricao() + " [" + status + "]" + progresso);
+}
+
 	}
 	
 	//Getters e Setters
@@ -69,4 +124,14 @@ public class Heroi extends Entidades{
 	public void setArmadura(String armadura) {
 		this.armadura = armadura;
 	}
+
+	 public int getXp() {
+        return xp;
+    }
+
+    public int getXpProximoNivel() {
+        return xpProximoNivel;
+    }
+
+}
 }

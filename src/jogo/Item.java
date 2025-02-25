@@ -1,7 +1,5 @@
 package jogo;
 
-import java.util.Random;
-
 public abstract class Item {
 	private String nome_item;
 	private String descricao_item;

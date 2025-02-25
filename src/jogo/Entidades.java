@@ -11,6 +11,8 @@ public abstract class Entidades {
 	private double stamina_max;
 	private double stamina_atual;
 	private int nivel;
+	private int ouro;
+	private int exp;
 	private ArrayList<Habilidade> habilidades = new ArrayList<Habilidade>();
 	private ArrayList<Item> itens = new ArrayList<Item>();
 	
@@ -78,18 +80,46 @@ public abstract class Entidades {
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
+
+	public int getOuro(){
+		return ouro;
+	}
+
+	public void setOuro(int ouro){
+		this.ouro = ouro;
+	}
+
+	public int getExp(){
+		return exp;
+	}
+
+	public void setExp(int exp){
+		this.exp = exp;
+	}
 	
 	public void getHabilidades() {
 		for(Habilidade h : habilidades) {
 			h.listarHabilidade();
 		}
-//		return habilidades;
 	}
 	
-	public void setHabilidades(String nome_hab, String descricao_hab, double dano_hab) {
-		Habilidade h = new Habilidade(nome_hab, descricao_hab, dano_hab);
+	public void setHabilidades(String nome_hab, String descricao_hab, double dano_hab, double custo_stamina_hab) {
+		Habilidade h = new Habilidade(nome_hab, descricao_hab, dano_hab, custo_stamina_hab);
 		this.habilidades.add(h);
 	}
+
+	/*public void getItens(){
+		for(Item i : itens){
+			i.listarItem();
+		}
+	}*/
+
+	/*public void setItens(){
+		Item i = new Item();
+		this.itens.add(i);
+	}
+	 * 
+	 */
 	
 	public ArrayList<Item> getItens() {
 		return itens;

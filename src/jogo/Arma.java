@@ -1,53 +1,53 @@
 package jogo;
 
+import java.util.Random;
+
 public class Arma extends Item{
+	Random random_arma = new Random();
+	private int ID_arma = random_arma.nextInt(3) + 1;
 	private double dano_arma;
-	private String tipo_arma; //machado, espada, lança
-	private int id_arma;
+	private double custo_stamina_arma;
 
+	//Construtores
+	public Arma(){
+		if(ID_arma == 1){
+			this.setNome_item("Espada");
+			this.setDescricao_item("Espada iniciante. Bom para iniciantes.");
+			this.dano_arma = 5;
+			this.custo_stamina_arma = 10;
+		}else if(ID_arma == 2){
+			this.setNome_item("Machado");
+			this.setDescricao_item("Machado de duas mãos, então dá mais dano!");
+			this.dano_arma = 7.5;
+			this.custo_stamina_arma = 25;
+		}else if(ID_arma == 3){
+			this.setNome_item("Adagas");
+			this.setDescricao_item("Pouco dano, mas gasta menos stamina.");
+			this.dano_arma = 3.5;
+			this.custo_stamina_arma = 5;
+		}else{
+			this.setNome_item("Nada...");
+			this.setDescricao_item("Você encontrou um belo de um nada!");
+			this.dano_arma = 0;
+			this.custo_stamina_arma = 0;
+		}
+	}
 
-	public double getdano_arma(){
+	//Getters e Setters
+	public double getDano_arma(){
 		return dano_arma;
 	}
 
-	public void setdano_arma(double dano_arma){
+	public void setDano_arma(double dano_arma){
 		this.dano_arma = dano_arma;
 	}
 
-	public String gettipo_arma(){
-		return tipo_arma;
-
+	public double getCusto_stamina(){
+		return custo_stamina_arma;
 	}
 
-	public void settipo_arma(String tipo_arma){
-		this.tipo_arma = tipo_arma;
-
+	public void setCusto_stamina(double custo_stamina){
+		this.custo_stamina_arma = custo_stamina;
 	}
-
-
-	//metodos
-
-	public Arma(){
-
-		this.dano_arma = dano_arma;
-		this.tipo_arma = tipo_arma;
-		this.id_arma = id_arma;
-
-		if( id_arma.equals(1) ){
-			this.settipo_arma("Espada");
-			this.setdano_arma(5);
-
-		}if else(id_arma.equals(2) ){
-			this.settipo_arma("Machado");
-			this.setdano_arma(7.5);
-
-		}if else(id_arma.equals(3) ){
-			this.settipo_arma("Adaga");
-			this.setdano_arma(3.5);
-			}
-		}else{
-			this.settipo_arma("Sem arma");
-			this.setdano_arma(0);
-		}
-	}
+}
 

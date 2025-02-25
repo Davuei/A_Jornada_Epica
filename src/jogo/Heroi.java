@@ -2,8 +2,6 @@ package jogo;
 
 public class Heroi extends Entidades{
 	private String armadura = "Sem_armadura";
-	private int ouro = 0;
-	private int exp = 0;
 	
 	//Contrutores
 	public Heroi() {
@@ -15,7 +13,7 @@ public class Heroi extends Entidades{
 		this.setDano_base(2.5);
 		this.setStamina_max(50);
 		this.setStamina_atual(this.getStamina_max());
-		this.setHabilidades("Sem_nome", "Sem_descricao", 0);
+		this.setHabilidades("Sem_nome", "Sem_descricao", 0, 0);
 	}
 	
 	public Heroi(String nome, String raca) {
@@ -28,11 +26,11 @@ public class Heroi extends Entidades{
 		this.setStamina_max(50);
 		this.setStamina_atual(this.getStamina_max());
 		if(raca.equals("Orc")) {
-			this.setHabilidades("Paulada", "Desfere um ataque poderoso, causando o dobro do dano base.", this.getDano_base() * 2);
+			this.setHabilidades("Paulada", "Desfere um ataque poderoso, causando o dobro do dano base.", this.getDano_base() * 2, 10);
 		}else if(raca.equals("Mago")) {
-			this.setHabilidades("Bola de fogo", "Lança uma bola de fogo que causa dano alto.", 15);
+			this.setHabilidades("Bola de fogo", "Lança uma bola de fogo que causa dano alto.", 15, 25);
 		}else {
-			this.setHabilidades("Sem_nome", "Sem_descricao", 0);
+			this.setHabilidades("Sem_nome", "Sem_descricao", 0, 0);
 		}
 	}
 	
@@ -41,6 +39,8 @@ public class Heroi extends Entidades{
 		this.setNivel(this.getNivel() + 1);
 		this.setVida_max(this.getVida_max() + (50 * (this.getNivel() - 1)));
 		this.setVida_atual(this.getVida_max());
+		this.setStamina_max(this.getStamina_max() + (25 * (this.getNivel() - 1)));
+		this.setStamina_atual(this.getStamina_max());
 	}
 	
 	//Guardar habilidade
@@ -68,21 +68,5 @@ public class Heroi extends Entidades{
 	
 	public void setArmadura(String armadura) {
 		this.armadura = armadura;
-	}
-	
-	public int getOuro() {
-		return ouro;
-	}
-	
-	public void setOuro(int ouro) {
-		this.ouro = ouro;
-	}
-	
-	public int getExp() {
-		return exp;
-	}
-	
-	public void setExp(int exp) {
-		this.exp = exp;
 	}
 }

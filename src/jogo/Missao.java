@@ -1,7 +1,5 @@
 package jogo;
 
-import java.util.*;
-
 // Classe Missao
 class Missao {
     private String descricao;

@@ -41,7 +41,7 @@ public class Mundo {
         }
     }
 
-    // Movimentação
+/*     // Movimentação
     public void mover(String direcao) {
         switch (direcao.toLowerCase()) {
             case "w": // cima
@@ -65,10 +65,10 @@ public class Mundo {
                 return;
         }
         interagirComCelula();
-    }
+    } */
 
     // Interações com a célula atual
-    private void interagirComCelula() {
+    /* private void interagirComCelula() {
         int evento = mapa[posicaoX][posicaoY];
         switch (evento) {
             case 1 -> { // Item
@@ -93,9 +93,9 @@ public class Mundo {
             case 5 -> System.out.println("Caminho livre... Nada por aqui!");
         }
         mapa[posicaoX][posicaoY] = 5; // Define como visitado
-    }
+    } */
 
-    // Simulador de jogo
+    /* // Simulador de jogo
     public void iniciarJogo() {
         Scanner scanner = new Scanner(System.in);
         String comando;
@@ -109,5 +109,5 @@ public class Mundo {
         }
         System.out.println("Jogo finalizado. Obrigado por jogar!");
         scanner.close();
-    }
+    } */
 }

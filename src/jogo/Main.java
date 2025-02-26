@@ -5,6 +5,12 @@ public class Main {
 		Heroi hero = new Heroi("Goulor", "Orc");
 		
 		hero.listarHeroi();
+
+		hero.levelUp();
+
+		System.out.println("UPOU DE NIVEL!!!!");
+
+		hero.listarHeroi();
 	}
 
 }

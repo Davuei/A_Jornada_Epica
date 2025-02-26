@@ -12,7 +12,8 @@ public abstract class Entidades {
 	private double stamina_atual;
 	private int nivel;
 	private int ouro;
-	private int exp;
+	private int exp_atual;
+	private int exp_max;
 	private ArrayList<Habilidade> habilidades = new ArrayList<Habilidade>();
 	private ArrayList<Item> itens = new ArrayList<Item>();
 	
@@ -89,12 +90,20 @@ public abstract class Entidades {
 		this.ouro = ouro;
 	}
 
-	public int getExp(){
-		return exp;
+	public int getExp_atual(){
+		return exp_atual;
 	}
 
-	public void setExp(int exp){
-		this.exp = exp;
+	public void setExp_atual(int exp){
+		this.exp_atual = exp;
+	}
+
+	public int getExp_max(){
+		return exp_max;
+	}
+
+	public void setExp_max(int exp_max){
+		this.exp_max = exp_max;
 	}
 	
 	public void getHabilidades() {

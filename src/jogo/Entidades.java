@@ -16,6 +16,13 @@ public abstract class Entidades {
 	private int exp_max;
 	private ArrayList<Habilidade> habilidades = new ArrayList<Habilidade>();
 	private ArrayList<Item> itens = new ArrayList<Item>();
+
+	//Lista as habilidades
+	public void chamarListarHabilidades(){
+		for(Habilidade h : habilidades) {
+			h.listarHabilidade();
+		}
+	}
 	
 	//Getters e Setters
 	public String getNome() {
@@ -106,10 +113,8 @@ public abstract class Entidades {
 		this.exp_max = exp_max;
 	}
 	
-	public void getHabilidades() {
-		for(Habilidade h : habilidades) {
-			h.listarHabilidade();
-		}
+	public ArrayList<Habilidade> getHabilidades() {
+		return habilidades;
 	}
 	
 	public void setHabilidades(String nome_hab, String descricao_hab, double dano_hab, double custo_stamina_hab) {

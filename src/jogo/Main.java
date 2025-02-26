@@ -8,8 +8,6 @@ public class Main {
 
 		hero.levelUp();
 
-		System.out.println("UPOU DE NIVEL!!!!");
-
 		hero.listarHeroi();
 	}
 

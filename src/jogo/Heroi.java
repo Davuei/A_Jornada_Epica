@@ -79,14 +79,20 @@ public class Heroi extends Entidades{
 
 	//Level Up
 	public void levelUp() {
+		System.out.println("\nLEVEL UP!\n");
 		this.setNivel(this.getNivel() + 1);
 		this.setVida_max(this.getVida_max() + (50 * (this.getNivel() - 1)));
 		this.setVida_atual(this.getVida_max());
 		this.setStamina_max(this.getStamina_max() + (25 * (this.getNivel() - 1)));
 		this.setStamina_atual(this.getStamina_max());
-		this.setDano_base(this.getDano_base() + (0.5 * (this.getNivel() - 1)));
+		this.setDano_base(this.getDano_base() + (1.25 * (this.getNivel() - 1)));
 		this.setExp_atual(0);
 		this.setExp_max(this.getNivel() * 3);
+		for(Habilidade h : this.getHabilidades()){
+			if(h.getNome_hab().equals("Paulada")){
+				h.setDano_hab(this.getDano_base() * 2);
+			}
+		}
 	}
 	
 	//Guardar habilidade
@@ -115,11 +121,12 @@ public class Heroi extends Entidades{
 	//Listar características do herói
 	public void listarHeroi() {
 		System.out.println(this.getNome());
+		System.out.println("Raça: " + this.getRaca());
 		System.out.println("Vida: " + this.getVida_atual() + "/" + this.getVida_max());
 		System.out.println("Stamina: " + this.getStamina_atual() + "/" + this.getStamina_max());
-		System.out.println("Raça: " + this.getRaca());
+		System.out.println("Dano base: " + this.getDano_base());
 		System.out.println("================================");
-		this.getHabilidades();
+		this.chamarListarHabilidades();
 		System.out.println("Ouro: " + this.getOuro());
 		System.out.println("Nivel: " + this.getNivel());
 		System.out.println("EXP: " + this.getExp_atual() + "/" + this.getExp_max());

@@ -26,7 +26,15 @@ public class Habilidade {
 		System.out.println("Habilidade: " + nome_hab + "\nDescrição: " + descricao_hab + "\nDano: " + dano_hab + "\nCusto da stamina: " + custo_stamina_hab);
 		System.out.println("================================");
 	}
-	
+
+	//Getters e Setters
+	public String getNome_hab(){
+		return nome_hab;
+	}
+
+	public void setDano_hab(double dano_hab){
+		this.dano_hab = dano_hab;
+	}
 	//Retornar habilidade
 //	public Habilidade criarHabilidade() {
 //		Habilidade h = new Habilidade();

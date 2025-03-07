@@ -1,113 +1,150 @@
 package jogo;
 
-import java.util.*;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Mundo {
-    private int[][] mapa;
-    private int posicaoX;
-    private int posicaoY;
-    private Heroi heroi;
-    private Random rand = new Random();
+    Random random_mundo = new Random();
+    private int mapa[] = new int[20];
+    private int level = 0;
 
-    public Mundo(int linhas, int colunas, Heroi heroi) {
-        this.mapa = new int[linhas][colunas];
-        this.posicaoX = 0;
-        this.posicaoY = 0;
-        this.heroi = heroi;
-        gerarMundo();
-    }
 
-    // Geração aleatória do mapa
-    private void gerarMundo() {
-        for (int i = 0; i < mapa.length; i++) {
-            for (int j = 0; j < mapa[0].length; j++) {
-                mapa[i][j] = rand.nextInt(5) + 1; // 1 a 5
-            }
+    //Construtores
+
+    public Mundo() {
+        for(int i = 0; i < 20; i++){
+            int rand = random_mundo.nextInt(5) + 1;
+            mapa[i] = rand;
+
+            System.out.println((i + 1) + "ª fase: " + mapa[i]);
         }
-        mapa[posicaoX][posicaoY] = 5; // Posição inicial do herói vazia
     }
 
-    // Exibe o mapa com a posição do herói
-    public void exibirMapa() {
-        for (int i = 0; i < mapa.length; i++) {
-            for (int j = 0; j < mapa[0].length; j++) {
-                if (i == posicaoX && j == posicaoY) {
-                    System.out.print(" H ");
-                } else {
-                    System.out.print(" [" + mapa[i][j] + "]");
+
+    //Passa para o próximo nível
+
+    public int nextLevel(){
+        System.out.println("Nível atual: " + (level + 1));
+
+        return mapa[level];
+    }
+
+
+    //Fases
+
+    public void restLevel(Heroi h){
+        System.out.println("Não há nada aqui... Você pode descansar...");
+        System.out.println("Stamina restaurada!");
+
+        h.setStamina_atual(h.getStamina_max());
+    }
+
+    public void itemLevel(Heroi h){
+        System.out.println("Item encontrado!");
+
+        Random gerar_item = new Random();
+        int i = gerar_item.nextInt(2) + 1;
+
+        if(i == 1){
+            System.out.println("Você encontrou uma arma!");
+            Arma a = new Arma();
+            a.listarArma();
+            h.guardarArma(a);
+        }else{
+            System.out.println("Você encontrou uma poção!");
+            Pocao p = new Pocao();
+            p.listarPocao();
+            h.guardarPocao(p);
+        }
+        System.out.println("Item adicionado ao seu inventário!");
+    }
+
+    public void monsterLevel(Heroi h){
+        System.out.println("CUIDADO! UM MONSTRO!!");
+
+        Scanner cin = new Scanner(System.in);
+        int escolha;
+
+        Monstro m = new Monstro();
+
+        do{
+            do{
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println(h.getNome());
+                System.out.println("Vida: " + h.getVida_atual() + "/" + h.getVida_max() + " | Stamina: " + h.getStamina_atual() + "/" + h.getStamina_max());
+                System.out.println("Seu turno. Escolha uma opção: ");
+                System.out.print("1 - Ataque básico;\n2 - Usar habilidade;\n3 - Usar item;\n4 - Descansar.\n>> ");
+                escolha = cin.nextInt();
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            }while(escolha > 4 || escolha < 1);
+
+            if(escolha == 1){
+                if(h.getStamina_atual() < 10){
+                    System.out.println("Você tenta atacar o monstro... mas está muito cansado.");
+                }else{
+                    System.out.println("Ataque!");;
+                    m.setVida_atual(m.getVida_atual() - h.getDano_base());
+                    h.setStamina_atual(h.getStamina_atual() - 10);
+                }
+            }else if(escolha == 2){
+                System.out.println("habilidade kk");
+            }else if(escolha == 3){
+                System.out.println("hmmmm itenzin");
+            }else{
+                System.out.println("Sabiamente, você usa seu turno para restaurar suas forças.");
+                h.setStamina_atual(h.getStamina_atual() + 20);
+
+                if(h.getStamina_atual() > h.getStamina_max()){
+                    h.setStamina_atual(h.getStamina_max());
                 }
             }
-            System.out.println();
+
+            if(m.getVida_atual() <= 0){
+                break;
+            }
+
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("Turno do monstro!");
+            System.out.println(m.getNome());
+            System.out.println("Vida: " + m.getVida_atual() + "/" + m.getVida_max() + " | Stamina: " + m.getStamina_atual() + "/" + m.getStamina_max());
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+            if(m.getStamina_atual() < 10){
+                System.out.println("O monstro estava muito cansado para atacar...");
+                m.setStamina_atual(m.getStamina_atual() + 5);
+            }else{
+                System.out.println(m.getNome() + " ataca, causando " + m.getDano_base() + " de dano!");;
+                h.setVida_atual(h.getVida_atual() - m.getDano_base());
+                m.setStamina_atual(m.getStamina_atual() - 10);
+            }
+        }while(h.getVida_atual() > 0 && m.getVida_atual() > 0);
+
+        if(m.getVida_atual() <= 0){
+            h.setOuro(h.getOuro() + m.getOuro());
+            h.setExp_atual(h.getExp_atual() + m.getExp_atual());
+            h.levelUp();
         }
     }
 
-/*     // Movimentação
-    public void mover(String direcao) {
-        switch (direcao.toLowerCase()) {
-            case "w": // cima
-                if (posicaoX > 0) posicaoX--;
-                else System.out.println("Não pode ir mais para cima!");
-                break;
-            case "s": // baixo
-                if (posicaoX < mapa.length - 1) posicaoX++;
-                else System.out.println("Não pode ir mais para baixo!");
-                break;
-            case "a": // esquerda
-                if (posicaoY > 0) posicaoY--;
-                else System.out.println("Não pode ir mais para a esquerda!");
-                break;
-            case "d": // direita
-                if (posicaoY < mapa[0].length - 1) posicaoY++;
-                else System.out.println("Não pode ir mais para a direita!");
-                break;
-            default:
-                System.out.println("Direção inválida. Use W (cima), S (baixo), A (esquerda), D (direita).");
-                return;
-        }
-        interagirComCelula();
-    } */
+    public void missionLevel(Heroi h){
+        System.out.println("Você avança e encontra um humilde fazendeiro");
+    }
 
-    // Interações com a célula atual
-    /* private void interagirComCelula() {
-        int evento = mapa[posicaoX][posicaoY];
-        switch (evento) {
-            case 1 -> { // Item
-                Item item = new Item("Poção de Cura", "Restaura 20 de vida");
-                System.out.println("Você encontrou um item: " + item.getNome());
-                heroi.coletarItem(item);
-            }
-            case 2 -> { // Monstro
-                Monstro monstro = new Monstro("Goblin", 20, 5);
-                System.out.println("Você encontrou um monstro: " + monstro.getNome());
-                heroi.lutar(monstro);
-            }
-            case 3 -> { // Missão
-                Missao missao = new Missao("Derrote 3 Goblins", 3, 100);
-                System.out.println("Nova missão: " + missao.getDescricao());
-                heroi.aceitarMissao(missao);
-            }
-            case 4 -> { // Loja
-                System.out.println("Você encontrou uma loja. Aqui você pode comprar e vender itens!");
-           // Lógica da loja pode ser expandida
-            }
-            case 5 -> System.out.println("Caminho livre... Nada por aqui!");
-        }
-        mapa[posicaoX][posicaoY] = 5; // Define como visitado
-    } */
+    public void shopLevel(Heroi h){
+        System.out.println("Vendedor: 'Gostaria de gastar essas moedas de ouro?'");
+        Loja l = new Loja();
+        l.itensAVenda(h);
+    }
+    
+    
+    //Getters e Setters
 
-    /* // Simulador de jogo
-    public void iniciarJogo() {
-        Scanner scanner = new Scanner(System.in);
-        String comando;
-        System.out.println("Bem-vindo ao mundo de aventuras!");
-        while (true) {
-            exibirMapa();
-            System.out.print("Mova o herói (W/A/S/D) ou 'sair' para encerrar: ");
-            comando = scanner.nextLine();
-            if (comando.equalsIgnoreCase("sair")) break;
-            mover(comando);
-        }
-        System.out.println("Jogo finalizado. Obrigado por jogar!");
-        scanner.close();
-    } */
+    public int getLevel(){
+        return level;
+    }
+
+    public void setLevel(int level){
+        this.level = level;
+    }
+
 }

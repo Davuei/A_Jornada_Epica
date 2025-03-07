@@ -17,12 +17,25 @@ public abstract class Entidades {
 	private ArrayList<Habilidade> habilidades = new ArrayList<Habilidade>();
 	private ArrayList<Item> itens = new ArrayList<Item>();
 
+
 	//Lista as habilidades
 	public void chamarListarHabilidades(){
 		for(Habilidade h : habilidades) {
 			h.listarHabilidade();
 		}
 	}
+
+
+	//Guarda uma arma
+	public void guardarArma(Item arma){
+		itens.add(arma);
+	}
+
+	//Guarda uma poção
+	public void guardarPocao(Item pocao){
+		itens.add(pocao);
+	}
+	
 	
 	//Getters e Setters
 	public String getNome() {
@@ -121,25 +134,8 @@ public abstract class Entidades {
 		Habilidade h = new Habilidade(nome_hab, descricao_hab, dano_hab, custo_stamina_hab);
 		this.habilidades.add(h);
 	}
-
-	/*public void getItens(){
-		for(Item i : itens){
-			i.listarItem();
-		}
-	}*/
-
-	/*public void setItens(){
-		Item i = new Item();
-		this.itens.add(i);
-	}
-	 * 
-	 */
 	
 	public ArrayList<Item> getItens() {
 		return itens;
-	}
-	
-	public void setItens(ArrayList<Item> itens) {
-		this.itens = itens;
 	}
 }

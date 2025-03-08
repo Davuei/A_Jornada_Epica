@@ -11,7 +11,7 @@ public class Main {
 		String raca_nome;
 
 		do{
-			System.out.print("Escolha sua raça:\n1 - Orc;\n2 - Mago\n>>");
+			System.out.print("Escolha sua raça:\n1 - Orc\n2 - Mago\n>> ");
 			raca = inicio.nextInt();
 		}while(raca < 1 || raca >2);
 

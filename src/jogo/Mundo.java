@@ -50,6 +50,7 @@ public class Mundo {
     }
 
     public void itemLevel(Heroi h){
+        System.out.println("\n\n\n\n");
         System.out.println("Item encontrado!");
 
         Random gerar_item = new Random();
@@ -113,7 +114,7 @@ public class Mundo {
                 do{
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");;
                     System.out.println("Usar: ");
-                    System.out.print("1 - Arma;\n2 - Poção.\n>>");
+                    System.out.print("1 - Arma\n2 - Poção\n>>");
                     item_escolha = batalha_cin.nextInt();
                 }while(item_escolha < 1 || item_escolha > 2);
 

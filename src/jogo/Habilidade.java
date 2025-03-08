@@ -7,13 +7,6 @@ public class Habilidade {
 	private double custo_stamina_hab;
 	
 	//Construtores
-	public Habilidade() {
-		this.nome_hab = "Sem_nome";
-		this.descricao_hab = "Sem_descrição";
-		this.dano_hab = 0;
-		this.custo_stamina_hab = 0;
-	}
-	
 	public Habilidade(String nome_hab, String descricao_hab, double dano_hab, double custo_stamina_hab) {
 		this.nome_hab = nome_hab;
 		this.descricao_hab = descricao_hab;
@@ -21,11 +14,13 @@ public class Habilidade {
 		this.custo_stamina_hab = custo_stamina_hab;
 	}
 	
+
 	//Retornar caracterísricas das habilidades
 	public void listarHabilidade() {
 		System.out.println("Habilidade: " + nome_hab + "\nDescrição: " + descricao_hab + "\nDano: " + dano_hab + "\nCusto da stamina: " + custo_stamina_hab);
 		System.out.println("================================");
 	}
+
 
 	//Getters e Setters
 	public String getNome_hab(){
@@ -35,14 +30,13 @@ public class Habilidade {
 	public void setDano_hab(double dano_hab){
 		this.dano_hab = dano_hab;
 	}
-	//Retornar habilidade
-//	public Habilidade criarHabilidade() {
-//		Habilidade h = new Habilidade();
-//		return h;
-//	}
-//	
-//	public Habilidade criarHabilidade(String nome, String descricao, double dano) {
-//		Habilidade h = new Habilidade(nome, descricao, dano);
-//		return h;
-//	}
+
+	public double getDano_hab(){
+		return dano_hab;
+	}
+
+	public double getCusto_stamina_hab(){
+		return custo_stamina_hab;
+	}
+	
 }

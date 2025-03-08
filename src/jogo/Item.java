@@ -3,7 +3,8 @@ package jogo;
 public abstract class Item {
 	private String nome_item;
 	private String descricao_item;
-	
+
+
 	//Getters e Setters
 	public String getNome_item() {
 		return nome_item;

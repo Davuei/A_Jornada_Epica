@@ -15,7 +15,8 @@ public abstract class Entidades {
 	private int exp_atual;
 	private int exp_max;
 	private ArrayList<Habilidade> habilidades = new ArrayList<Habilidade>();
-	private ArrayList<Item> itens = new ArrayList<Item>();
+	private ArrayList<Arma> armas = new ArrayList<Arma>();
+	private ArrayList<Pocao> pocoes = new ArrayList<Pocao>();
 
 
 	//Lista as habilidades
@@ -26,14 +27,49 @@ public abstract class Entidades {
 	}
 
 
-	//Guarda uma arma
-	public void guardarArma(Item arma){
-		itens.add(arma);
+	//Lista as armas
+	public void chamarListarArmas(){
+		for(Arma a : armas){
+			a.listarArma();
+		}
 	}
 
+
+	//Lista as poções
+	public void chamarListarPocoes(){
+		for(Pocao p : pocoes){
+			p.listarPocao();
+		}
+	}
+
+
+	//Guarda uma arma
+	public void guardarArma(Arma arma){
+		armas.add(arma);
+	}
+
+
 	//Guarda uma poção
-	public void guardarPocao(Item pocao){
-		itens.add(pocao);
+	public void guardarPocao(Pocao pocao){
+		pocoes.add(pocao);
+	}
+
+
+	//Verifica se há armas no inventário
+	public int getTamanho_armas(){
+		return armas.size();
+	}
+
+
+	//Verifica se há poções no inventário
+	public int getTamanho_pocoes(){
+		return pocoes.size();
+	}
+
+
+	//Quando uma poção é usada, remove ela
+	public void removerPocao(){
+		pocoes.remove(0);
 	}
 	
 	
@@ -134,8 +170,12 @@ public abstract class Entidades {
 		Habilidade h = new Habilidade(nome_hab, descricao_hab, dano_hab, custo_stamina_hab);
 		this.habilidades.add(h);
 	}
-	
-	public ArrayList<Item> getItens() {
-		return itens;
+
+	public ArrayList<Arma> getArmas(){
+		return armas;
+	}
+
+	public ArrayList<Pocao> getPocoes(){
+		return pocoes;
 	}
 }

@@ -11,9 +11,9 @@ public class Arma extends Item{
 	//Retorna as informações da arma
 	public void listarArma(){
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println(this.getNome_item());
-		System.out.println("Descrição: " + this.getDescricao_item());
-		System.out.println("Dano: " + this.getDano_arma());
+		System.out.println(getNome_item());
+		System.out.println("Descrição: " + getDescricao_item());
+		System.out.println("Dano: " + getDano_arma());
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	}
 
@@ -21,17 +21,17 @@ public class Arma extends Item{
 	//Construtores
 	public Arma(){
 		if(ID_arma == 1){
-			this.setNome_item("Espada");
-			this.setDescricao_item("Espada iniciante. Bom para iniciantes.");
-			this.dano_arma = 5;
+			setNome_item("Espada");
+			setDescricao_item("Espada iniciante. Bom para iniciantes.");
+			dano_arma = 5;
 		}else if(ID_arma == 2){
-			this.setNome_item("Machado");
-			this.setDescricao_item("Machado de duas mãos, então dá mais dano!");
-			this.dano_arma = 7.5;
+			setNome_item("Machado");
+			setDescricao_item("Machado de duas mãos, então dá mais dano!");
+			dano_arma = 7.5;
 		}else{
-			this.setNome_item("Adagas");
-			this.setDescricao_item("Não causam muito dano, mas são bem estilosas.");
-			this.dano_arma = 3.5;
+			setNome_item("Adagas");
+			setDescricao_item("Não causam muito dano, mas são bem estilosas.");
+			dano_arma = 3.5;
 		}
 		
 	}
@@ -43,6 +43,10 @@ public class Arma extends Item{
 
 	public void setDano_arma(double dano_arma){
 		this.dano_arma = dano_arma;
+	}
+
+	public int getID_arma(){
+		return ID_arma;
 	}
 }
 
